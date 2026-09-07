@@ -1,0 +1,2 @@
+curl --request GET --url http://localhost:3060/api/gifts/424
+{"error":"Gift not found"}

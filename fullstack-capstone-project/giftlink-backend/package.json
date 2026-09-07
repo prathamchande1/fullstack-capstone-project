@@ -1,0 +1,15 @@
+{
+    "name": "giftlink-backend",
+    "version": "1.0.0",
+    "description": "GiftLink backend",
+    "type": "module",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+      "dotenv": "^16.0.0",
+      "express": "^4.0.0",
+      "mongodb": "^6.0.0"
+    }
+  }

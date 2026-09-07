@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import giftRoutes from "./routes/giftRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 const app = express();

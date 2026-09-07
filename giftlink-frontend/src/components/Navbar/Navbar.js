@@ -19,6 +19,9 @@ export default function Navbar() {
                             Details
                         </a>
                         </li>
+                        <li className="nav-item">
+                        <a className="nav-link" href="/app/search">Search</a>
+                    </li>
                 </ul>
             </div>
         </nav>

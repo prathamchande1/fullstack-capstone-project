@@ -1,0 +1,17 @@
+https://github.com/prathamchande1/fullstack-capstone-project/blob/main/giftlink-backend/routes/authRoutes.js
+
+
+
+
+
+
+curl --location 'http://localhost:3060/api/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "testuser123@example.com",
+    "password": "test123"
+}'
+
+

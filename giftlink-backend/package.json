@@ -2,15 +2,19 @@
     "name": "giftlink-backend",
     "version": "1.0.0",
     "description": "GiftLink backend",
-    "type": "module",
     "main": "app.js",
     "scripts": {
         "start": "node app.js"
     },
     "dependencies": {
+        "bcryptjs": "^3.0.3",
         "cors": "^2.8.6",
-        "dotenv": "^16.0.0",
-        "express": "^4.0.0",
-        "mongodb": "^6.0.0"
+        "dotenv": "^16.6.1",
+        "express": "^4.22.2",
+        "express-validator": "^7.3.2",
+        "jsonwebtoken": "^9.0.3",
+        "mongodb": "^6.21.0",
+        "pino": "^10.3.1",
+        "pino-http": "^11.0.0"
     }
 }

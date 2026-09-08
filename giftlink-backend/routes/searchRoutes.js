@@ -1,5 +1,5 @@
-import express from "express";
-import connectToDatabase from "../models/db.js";
+const express = require("express");
+const connectToDatabase = require("../models/db");
 
 const router = express.Router();
 
@@ -49,4 +49,4 @@ router.get("/", async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;

@@ -1,13 +1,16 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import giftRoutes from "./routes/giftRoutes.js";
-import searchRoutes from "./routes/searchRoutes.js";
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const giftRoutes = require("./routes/giftRoutes");
+const authRoutes = require("./routes/authRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/gifts", giftRoutes);
+app.use("/api/auth", authRoutes);
 // Search routes
 app.use("/api/search", searchRoutes);
 const PORT = process.env.PORT || 3060;

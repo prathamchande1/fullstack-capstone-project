@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Profile.css'
 import {urlConfig} from '../../config';
-import { useAppContext } from '../../context/AuthContext';
+// import { useAppContext } from '../../context/AuthContext';
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState({});
  const [updatedDetails, setUpdatedDetails] = useState({});
- const {setUserName} = useAppContext();
+//  const {setUserName} = useAppContext();
  const [changed, setChanged] = useState("");
 
  const [editMode, setEditMode] = useState(false);
@@ -63,7 +63,7 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const payload = { ...updatedDetails };
+    // const payload = { ...updatedDetails };
     const response = await fetch(`${urlConfig.backendUrl}/api/auth/update`, {
       //Step 1: Task 1
       //Step 1: Task 2

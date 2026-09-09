@@ -25,3 +25,14 @@ curl --location 'http://localhost:3060/api/auth/login' \
     "email": "doesnotexist@example.com",
     "password": "test123"
 }'
+
+
+
+
+
+curl --location --request PUT 'http://localhost:3060/api/auth/update' \
+--header 'Content-Type: application/json' \
+--header 'email: testuser123@example.com' \
+--data-raw '{
+    "name": "UpdatedName"
+}'

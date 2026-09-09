@@ -21,6 +21,7 @@ function LoginPage() {
         e.preventDefault();
         
 try {
+    	//Step 1: Implement API call
             const res = await fetch(
                 `${urlConfig.backendUrl}/api/auth/login`,
                 {

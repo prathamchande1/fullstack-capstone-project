@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Profile.css'
 import {urlConfig} from '../../config';
-// import { useAppContext } from '../../context/AuthContext';
+import { useAppContext } from '../../context/AuthContext';
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState({});
  const [updatedDetails, setUpdatedDetails] = useState({});
-//  const {setUserName} = useAppContext();
+ const {setUserName} = useAppContext();
  const [changed, setChanged] = useState("");
 
  const [editMode, setEditMode] = useState(false);
@@ -63,17 +63,28 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    // const payload = { ...updatedDetails };
+    const payload = { ...updatedDetails };
     const response = await fetch(`${urlConfig.backendUrl}/api/auth/update`, {
       //Step 1: Task 1
+      method: "PUT",
       //Step 1: Task 2
+       headers: {
+        "Authorization": `Bearer ${authtoken}`,
+        "Content-Type": "application/json",
+        "Email": email,
+      },
       //Step 1: Task 3
+      body: JSON.stringify(payload),
     });
 
     if (response.ok) {
       // Update the user details in session storage
       //Step 1: Task 4
+      setUserName(updatedDetails.name);
+
       //Step 1: Task 5
+      sessionStorage.setItem("name", updatedDetails.name);
+
       setUserDetails(updatedDetails);
       setEditMode(false);
       // Display success message to the user

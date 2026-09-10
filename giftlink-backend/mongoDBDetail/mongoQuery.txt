@@ -1,0 +1,88 @@
+MongoDB
+
+
+========================
+use giftsdb
+=========================
+db.gifts.insertMany([
+  {
+    id: "1",
+    name: "Office Desk",
+    category: "Office",
+    condition: "Like New",
+    age_years: 2,
+    description: "A spacious wooden office desk in excellent condition.",
+    image: "/images/office-desk.jpeg",
+    date_added: 1767225600
+  },
+  {
+    id: "2",
+    name: "Desk Chair",
+    category: "Office",
+    condition: "New",
+    age_years: 1,
+    description: "A comfortable adjustable chair suitable for home offices.",
+    image: "/images/desk-chair.jpeg",
+    date_added: 1767312000
+  },
+  {
+    id: "3",
+    name: "Coffee Table",
+    category: "Living",
+    condition: "Like New",
+    age_years: 3,
+    description: "A modern coffee table suitable for a living room.",
+    image: "/images/coffee-table.jpeg",
+    date_added: 1767398400
+  },
+  {
+    id: "4",
+    name: "Bed Frame",
+    category: "Bedroom",
+    condition: "Older",
+    age_years: 5,
+    description: "A strong wooden bed frame with minor signs of use.",
+    image: "/images/bed-frame.jpeg",
+    date_added: 1767484800
+  },
+  {
+    id: "5",
+    name: "Dining Table",
+    category: "Kitchen",
+    condition: "Like New",
+    age_years: 4,
+    description: "A dining table suitable for a family of six.",
+    image: "/images/dining-table.jpeg",
+    date_added: 1767571200
+  },
+  {
+    id: "6",
+    name: "Bookshelf",
+    category: "Living",
+    condition: "New",
+    age_years: 1,
+    description: "A tall bookshelf with multiple storage shelves.",
+    image: "/images/bookshelf1.jpeg",
+    date_added: 1767657600
+  }
+])
+
+===========================
+
+
+
+db.gifts.insertOne({
+  id: "1",
+  name: "Office Desk",
+  category: "Office",
+  condition: "Like New",
+  age_years: 2,
+  description: "A spacious wooden office desk in excellent condition.",
+  image: "/images/office-desk.jpeg",
+  date_added: 1767225600
+})
+
+===============
+
+db.gifts.findOne({ id: "1" })
+db.gifts.countDocuments()

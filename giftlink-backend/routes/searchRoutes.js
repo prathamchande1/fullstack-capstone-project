@@ -16,9 +16,11 @@ router.get("/", async (req, res) => {
         const query = {};
 
         // Task 2: Add name filter
-        if (req.query.name && req.query.name.trim() !== "") {
-            query.name = req.query.name;
+         if (req.query.name && req.query.name.trim() !== "") {
+            const escapedName = req.query.name.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            query.name = { $regex: escapedName, $options: "i" };
         }
+
 
         // Task 3: Add other filters
         if (req.query.category) {

@@ -100,7 +100,11 @@ function SearchPage() {
                             searchResults.map(product => (
                                 <div key={product.id} className="card mb-3">
                                     {/* Check if product has an image and display it */}
-                                    <img src={product.image} alt={product.name} className="card-img-top" />
+                                      {product.image ? (
+                                        <img src={product.image} alt={product.name} className="card-img-top" />
+                                    ) : (
+                                        <div className="no-image-available">No Image Available</div>
+                                    )}
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text">{product.description.slice(0, 100)}...</p>

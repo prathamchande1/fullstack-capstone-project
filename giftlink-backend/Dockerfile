@@ -1,10 +1,10 @@
-FROM node:18.12.1-bullseye-slim
+FROM node:20
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 

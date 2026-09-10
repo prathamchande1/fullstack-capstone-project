@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [ageRange, setAgeRange] = useState(6); // Initialize with minimum value
+    const [category, setCategory] = useState('');
+    const [condition, setCondition] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
     const conditions = ['New', 'Like New', 'Older'];
@@ -28,21 +30,25 @@ function SearchPage() {
         fetchProducts();
     }, []);
     const handleSearch = async () => {
-        // Construct the search URL based on user input
-        const baseUrl = `${urlConfig.backendUrl}/api/search?`;
-        const queryParams = new URLSearchParams({
-            name: searchQuery,
-            age_years: ageRange,
-            category: document.getElementById('categorySelect').value,
-            condition: document.getElementById('conditionSelect').value,
-        }).toString();
         try {
-            const response = await fetch(`${baseUrl}${queryParams}`);
+            const response = await fetch(`${urlConfig.backendUrl}/api/gifts`);
             if (!response.ok) {
                 throw new Error('Search failed');
             }
             const data = await response.json();
-            setSearchResults(data);
+            const normalizedName = searchQuery.trim().toLowerCase();
+            const filteredResults = data.filter((product) => {
+                const matchesName = !normalizedName ||
+                    (product.name || '').toLowerCase().includes(normalizedName);
+                const matchesCategory = !category ||
+                    (product.category || '').trim().toLowerCase() === category.toLowerCase();
+                const matchesCondition = !condition ||
+                    (product.condition || '').trim().toLowerCase() === condition.toLowerCase();
+                const matchesAge = Number(product.age_years) <= Number(ageRange);
+
+                return matchesName && matchesCategory && matchesCondition && matchesAge;
+            });
+            setSearchResults(filteredResults);
         } catch (error) {
             console.error('Failed to fetch search results:', error);
         }
@@ -60,7 +66,7 @@ function SearchPage() {
                         <div className="d-flex flex-column">
                             {/* Category Dropdown */}
                             <label htmlFor="categorySelect">Category</label>
-                            <select id="categorySelect" className="form-control my-1">
+                            <select id="categorySelect" className="form-control my-1" value={category} onChange={(e) => setCategory(e.target.value)}>
                                 <option value="">All</option>
                                 {categories.map(category => (
                                     <option key={category} value={category}>{category}</option>
@@ -68,7 +74,7 @@ function SearchPage() {
                             </select>
                             {/* Condition Dropdown */}
                             <label htmlFor="conditionSelect">Condition</label>
-                            <select id="conditionSelect" className="form-control my-1">
+                            <select id="conditionSelect" className="form-control my-1" value={condition} onChange={(e) => setCondition(e.target.value)}>
                                 <option value="">All</option>
                                 {conditions.map(condition => (
                                     <option key={condition} value={condition}>{condition}</option>
@@ -107,7 +113,8 @@ function SearchPage() {
                                     )}
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
-                                        <p className="card-text">{product.description.slice(0, 100)}...</p>
+                                        <p className="card-text">{(product.description || '').slice(0, 100)}...</p>
+                                        <h5 className="card-title">Condition :-{product.condition}</h5>
                                     </div>
                                     <div className="card-footer">
                                         <button onClick={() => goToDetailsPage(product.id)} className="btn btn-primary">

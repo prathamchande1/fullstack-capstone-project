@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 
 export default function Navbar() {
@@ -11,17 +10,14 @@ export default function Navbar() {
         const authTokenFromSession = sessionStorage.getItem('auth-token');
         const nameFromSession = sessionStorage.getItem('name');
 
-        if (authTokenFromSession) {
-            if (isLoggedIn && nameFromSession) {
-                setUserName(nameFromSession);
-            } else {
-                sessionStorage.removeItem('auth-token');
-                sessionStorage.removeItem('name');
-                sessionStorage.removeItem('email');
-                setIsLoggedIn(false);
-            }
+        if (authTokenFromSession && nameFromSession) {
+            setIsLoggedIn(true);
+            setUserName(nameFromSession);
+        } else {
+            setIsLoggedIn(false);
+            setUserName('');
         }
-    }, [isLoggedIn, setIsLoggedIn, setUserName]);
+    }, [setIsLoggedIn, setUserName]);
 
     const handleLogout = () => {
         sessionStorage.removeItem('auth-token');
@@ -36,7 +32,6 @@ export default function Navbar() {
         navigate('/app/profile');
     };
 
-    void urlConfig;
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="/">GiftLink</a>
@@ -48,15 +43,15 @@ export default function Navbar() {
                     <a className="nav-link" href="/home.html">Home</a> {/* Link to home.html */}
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/app">Gifts</a> {/* Updated Link */}
+                        <Link className="nav-link" to="/app">Gifts</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/app/product/1">
+                        <Link className="nav-link" to="/app/product/1">
                             Details
-                        </a>
+                        </Link>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link" href="/app/search">Search</a>
+                        <Link className="nav-link" to="/app/search">Search</Link>
                     </li>
                              {isLoggedIn ? (
                         <>

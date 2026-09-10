@@ -15,13 +15,14 @@ function DetailsPage() {
         if (!authenticationToken) {
             // Task 1: Check for authentication and redirect
             navigate('/app/login');
+            return;
         }
 
         // get the gift to be rendered on the details page
         const fetchGift = async () => {
             try {
                 // Task 2: Fetch gift details
-                const url = `${urlConfig.backendUrl}api/gifts/${productId}`;
+                const url = `${urlConfig.backendUrl}/api/gifts/${productId}`;
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -99,10 +100,10 @@ function DetailsPage() {
                         {gift.condition}
                     </p>
                     <p><strong>Date Added:</strong> 
-                        {gift.dateAdded}
+                        {new Date(gift.date_added * 1000).toLocaleDateString()}
                     </p>
                     <p><strong>Age (Years):</strong> 
-                        {gift.age}
+                        {gift.age_years}
                     </p>
                     <p><strong>Description:</strong> 
                         {gift.description}

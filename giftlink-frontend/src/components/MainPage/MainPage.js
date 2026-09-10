@@ -4,6 +4,8 @@ import {urlConfig} from '../../config';
 
 function MainPage() {
     const [gifts, setGifts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,6 +24,9 @@ function MainPage() {
                         setGifts(data);
                     } catch (error) {
                         console.log('Fetch error: ' + error.message);
+                        setError('Unable to load gifts. Please check that the backend is running.');
+                    } finally {
+                        setLoading(false);
                     }
                 };
         
@@ -50,6 +55,12 @@ return date.toLocaleDateString('default', { month: 'long', day: 'numeric', year:
 
     return (
         <div className="container mt-5">
+                        <h1 className="mb-4">Available Gifts</h1>
+            {loading && <div className="alert alert-info">Loading gifts...</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
+            {!loading && !error && gifts.length === 0 && (
+                <div className="alert alert-info">No gifts are currently available.</div>
+            )}
             <div className="row">
                 {gifts.map((gift) => (
                     <div key={gift.id} className="col-md-4 mb-4">

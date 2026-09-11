@@ -1,0 +1,11 @@
+curl --request POST \
+ --url http://localhost:3060/api/auth/register \
+ --header "Content-Type: application/json" \
+ --data '{
+"firstName": "Prakash",
+"lastName": "Chand",
+"email": "prakash@example.com",
+"password": "Test123"
+}'
+
+{"authtoken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoizBiYmEyOTM0In0sImlhdCI6MTc4OTEyNDEzMX0.sRilqtVLq2-xLAcmk0QMGYGwg4iMu8Rf"prakash@example.com"}

@@ -4,17 +4,17 @@ FROM node:18-slim
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json files
+# Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Copy application code
 COPY . .
 
-# Expose port (if needed)
+# Expose website port
 EXPOSE 9000
 
-# Run the application
+# Start server
 CMD ["node", "index.js"]

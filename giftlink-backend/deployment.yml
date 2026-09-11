@@ -31,7 +31,7 @@ spec:
 
           env:
             - name: MONGO_URI
-              value: "mongodb://mongodb-service:27017"
+              value: "mongodb://172.21.36.205:27017"
 
             - name: DB_NAME
               value: "giftsdb"

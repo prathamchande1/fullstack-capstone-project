@@ -8,14 +8,14 @@ const PORT = 9000;
 // Serve the React build folder
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Serve home.html for the root route
-app.get('/', (req, res) => {
+// Serve the landing page only for the public home routes.
+app.get(['/', '/home.html'], (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'home.html'));
 });
 
-// Fallback for React/static pages
+// React Router handles /app and all of its child routes in the browser.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'home.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
